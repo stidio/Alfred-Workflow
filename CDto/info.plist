@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>io.github.stidio.alfred.cd</string>
+	<key>connections</key>
+	<dict>
+		<key>D1F04EF9-1085-4FD0-BA92-EEC4A2FB0701</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DFF0B41C-19EA-49D6-AEAD-1552A937F289</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Nicolas Chow</string>
+	<key>description</key>
+	<string>打开Terminal并转到任意文件夹或文件所在目录</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>CDto</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>#!/bin/bash
+
+# Author:   Nicolas Chow
+# Contact:  stidio@163.com
+# Blog:     http://stidio.github.io
+# Created:  2016-11-21 12:21:00
+
+FILE={query}
+
+if [ -d "${FILE}" ]; then     # 目录直接保存
+  DIR=${FILE}
+else
+  if [ -f "${FILE}" ]; then   # 文件获取文件所在目录
+    DIR=$(dirname "${FILE}")
+  else                        # 其他情况直接退出
+    exit 1
+  fi
+fi
+
+# 通过osascript(JavaScript)打开Terminal，然后输入cd ...
+osascript -l JavaScript &lt;&lt; END
+  term = Application("Terminal");
+  term.doScript("cd \"${DIR}\"");
+  term.activate();
+END</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DFF0B41C-19EA-49D6-AEAD-1552A937F289</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>anchorfields</key>
+				<true/>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>daterange</key>
+				<integer>0</integer>
+				<key>fields</key>
+				<array>
+					<dict>
+						<key>field</key>
+						<string>kMDItemDisplayName</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemAlternateNames</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemFinderComment</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+				</array>
+				<key>includesystem</key>
+				<false/>
+				<key>keyword</key>
+				<string>cd</string>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>scopes</key>
+				<array/>
+				<key>subtext</key>
+				<string>请继续输入以匹配</string>
+				<key>title</key>
+				<string>CDto</string>
+				<key>types</key>
+				<array/>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.filefilter</string>
+			<key>uid</key>
+			<string>D1F04EF9-1085-4FD0-BA92-EEC4A2FB0701</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>D1F04EF9-1085-4FD0-BA92-EEC4A2FB0701</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
+		<key>DFF0B41C-19EA-49D6-AEAD-1552A937F289</key>
+		<dict>
+			<key>xpos</key>
+			<integer>470</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://stidio.github.io</string>
+</dict>
+</plist>
