@@ -63,7 +63,7 @@ def get_local_ip():
 
 
 def get_public_ip():
-    PUBLIC_IP_QUERY_URL = 'http://1212.ip138.com/ic.asp'
+    PUBLIC_IP_QUERY_URL = 'http://2017.ip138.com/ic.asp'
     try:
         rt = web.get(PUBLIC_IP_QUERY_URL)
         rt.raise_for_status()
